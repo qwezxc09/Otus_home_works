@@ -30,7 +30,7 @@ mv /var/lib/postgresql/15 /mnt/data
 ```
 data_directory = '/var/lib/postgresql/15/main'
 ```
-Данный параметр находится в: postgresql.conf
+Данный параметр находится в:
 ```
 /etc/postgresql/15/main/postgresql.conf
 ```
