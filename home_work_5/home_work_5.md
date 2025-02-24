@@ -6,16 +6,16 @@
 sudo -u postgres psql
 ```
 4. Создал новую базу данных testdb
-```
+```SQL
 create database testdb
 ```
 5. Зашел в БД testdb (\c testdb)
 6. создайте новую схему testnm
-```
+```SQL
 create schema testnm
 ```
 7. Создал новую таблицу t1 и заполнил данными:
-```
+```SQL
 create table testnm.t1(c1 integer);
 insert
 into
@@ -25,7 +25,7 @@ values(1);
 8. Cоздаk новую роль readonly, дал роли readonly право на подключение к БД testdb, 
 дал роли readonly право на использование схемы testnm, дал роли readonly
 право на select для всех таблиц схемы testnm
-```
+```SQL
 create role readonly;
 
 grant connect on
@@ -40,7 +40,7 @@ on
     all tables in schema testnm to readonly;
 ```
 9. Создал пользователя testread с паролем test123, дал роль readonly пользователю testread:
-```
+```SQL
 create user testread with password 'test123';
 
 grant readonly to testread;
@@ -50,7 +50,7 @@ grant readonly to testread;
 psql -U testread -h 127.0.0.1 -d testdb -W
 ```
 11. Выполнил select таблицы t1
-```
+```SQL
 select
     *
 from
@@ -59,7 +59,7 @@ from
 12. Select прошел успешно
 13. Читая шпаргалку понятно, что расчет был на то, что таблица должна была создаться в схеме public, если явно не указать схему при создании.
 14. Выполнил команду создания таблицы t2
-```
+```SQL
 create table testnm.t2(c1 integer);
 ```
 Выполнить create не вышло из-за отсутсвия прав: 
@@ -68,9 +68,10 @@ ERROR:  permission denied for schema testnm
 LINE 1: create table testnm.t2(c1 integer);
 ```
 попробовал выполнить в схеме public:
-```
+```SQL
 create table public.t2(c1 integer);
 ```
 Создание прошло успешно.
 Добавить таблицу в схему public вышло из-за наличия дефолтных прав у роли readonly.
-15. **Итог:** После просмотра шпаргалки получилось лучше понять суть домашнего задания.
+
+15. Итог: После просмотра шпаргалки получилось лучше понять суть домашнего задания.
