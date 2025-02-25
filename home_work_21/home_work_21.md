@@ -1,6 +1,6 @@
 # Виды и устройство репликации в PostgreSQL. Практика применения 
 1. Создал 4 виртуальные машины. Сконфигурировал файлы postgresql.conf, pg_hba.conf. ЧТобы можно было подключаться из вне. 
-2. Выстовил 1ой и второй машине wal_level = logical:
+2. Выстовил первой и второй машине wal_level = logical:
 ```SQL
 alter system set wal_level = logical;
 ```
@@ -13,11 +13,11 @@ sudo systemctl restart postgresql
 create table test (id int);
 create table test2 (id int);
 ```
-5. Сделал публикацию таблицы test для 1ой ВМ:
+5. Сделал публикацию таблицы test для 1-ой ВМ:
 ```SQL
 create publication test_pub for table test;
 ```
-6. Сделал публикацию таблицы test для 1ой ВМ:
+6. Сделал публикацию таблицы test для 2-ой ВМ:
 ```SQL
 create publication test2_pub for table test2;
 ```
@@ -50,4 +50,4 @@ sudo rm -rf /var/lib/postgresql/15/main
 sudo -u postgres pg_basebackup -h 89.169.137.120  -p 5432 -R -D /var/lib/postgresql/15/main
 sudo systemctl start postgresql
 ```
-1. По данным шагам проверил работоспособность с помощью инстртов на первой и второй ВМ и все работает. На каждой ВМ данные одинаковые
+1. По данным шагам проверил работоспособность с помощью инсертов на первой и второй ВМ, все работает. На каждой ВМ данные одинаковые
