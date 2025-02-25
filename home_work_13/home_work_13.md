@@ -44,10 +44,10 @@ create table hwindex."MulticolumnIndexes" (
 ```
 
 | Таблица                      | Для чего                                                                |
- |------------------------------|-------------------------------------------------------------------------|
+| ---------------------------- | --------------------------------------------------------------------    |
 | SimpleIndex                  | Для самого простого индекса                                             |
 | FullTextSearchingIndexTable  | Для индекса полнотекстового поиска с добавлением столбца типа tsvector  |
-| FullTextSearchingIndexTable2 | Для индекса полнотекстового поиска с добавлением столбца типа tsvector  |
+| FullTextSearchingIndexTable2 | Для индекса полнотекстового поиска  |
 | PartialIndex                 | Для частичного индекс                                                   |
 | MulticolumnIndexes           | Для составного индекса                                                  |
 
@@ -331,8 +331,9 @@ explain analyze
 select *
 from hwindex."MulticolumnIndexes" 
 where user_id = 40 AND order_date > '2019-04-01';
- **QUERY PLAN** 
- ```
+```
+**QUERY PLAN** 
+```
  Bitmap Heap Scan on "MulticolumnIndexes"  (cost=134.60..8699.99 rows=9578 width=34) (actual time=1.632..8.849 rows=9862 loops=1)
    Recheck Cond: ((user_id = 40) AND (order_date > '2019-04-01'::date))
    Heap Blocks: exact=5640
@@ -341,4 +342,5 @@ where user_id = 40 AND order_date > '2019-04-01';
  Planning Time: 0.222 ms
  Execution Time: 9.258 ms
 ```
+
 Работает быстрее.
