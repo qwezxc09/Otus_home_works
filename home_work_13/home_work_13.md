@@ -140,21 +140,14 @@ select * from hwindex."FullTextSearchingIndexTable"
 where some_text_lexeme @@ to_tsquery('london');
 ```
 **Результат (несколько строк и план запроса)**
-id   | user_id | order_date |  status   |       some_text        |         some_text_lexeme          
+| id   | user_id | order_date |  status   |       some_text        |         some_text_lexeme   |       
 
---------|---------|------------|-----------|------------------------|-----------------------------------
-
-   4661 |      56 | 2019-06-08 | completed | London of some         | 'london':1
-
-    510 |      12 | 2019-10-10 |           | London of some         | 'london':1
-
-    514 |       5 | 2019-07-16 | completed | London Britain example | 'britain':2 'exampl':3 'london':1
-
-    515 |      69 | 2019-07-26 | returned  | London Britain example | 'britain':2 'exampl':3 'london':1
-
-    517 |       9 | 2019-04-08 | completed | London Britain         | 'britain':2 'london':1
-
-
+| --------|---------|------------|-----------|------------------------|----------------------------------- |
+  | 4661 |      56 | 2019-06-08 | completed | London of some         | 'london':1 |
+  |  510 |      12 | 2019-10-10 |           | London of some         | 'london':1 |
+   | 514 |       5 | 2019-07-16 | completed | London Britain example | 'britain':2 'exampl':3 'london':1 |
+   | 515 |      69 | 2019-07-26 | returned  | London Britain example | 'britain':2 'exampl':3 'london':1 |
+   | 517 |       9 | 2019-04-08 | completed | London Britain         | 'britain':2 'london':1 |
 
  **QUERY PLAN** 
  ```
